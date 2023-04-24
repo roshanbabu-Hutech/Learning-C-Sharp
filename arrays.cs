@@ -38,6 +38,23 @@ namespace MyApplication
       Console.WriteLine(myNumbers.Max());  // returns the largest value
       Console.WriteLine(myNumbers.Min());  // returns the smallest value
       Console.WriteLine(myNumbers.Sum());  // returns the sum of elements
+
+    //   Multi dimensional arrays
+    int[,] numbers = { {1, 4, 2}, {3, 6, 8} };
+    numbers[0, 0] = 5;  // Change value to 5
+    Console.WriteLine(numbers[0, 0]); // Outputs 5 instead of 1
+
+    // loop through multi dimensional arrays
+
+    int[,] numbers = { {1, 4, 2}, {3, 6, 8} };
+
+        for (int i = 0; i < numbers.GetLength(0); i++) 
+        { 
+        for (int j = 0; j < numbers.GetLength(1); j++) 
+        { 
+            Console.WriteLine(numbers[i, j]); 
+        } 
+        } 
     }
   }
 }
