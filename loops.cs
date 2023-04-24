@@ -40,5 +40,19 @@ namespace MyApplication
     Console.WriteLine(" Inner: " + j); // Executes 6 times (2 * 3)
   }
 }
+    string[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+    foreach (string i in cars){
+        Console.WriteLine(i);
     }
+    int i = 0;
+    while (i < 10){
+  if (i == 4) 
+  {
+    i++;
+    continue;
   }
+  Console.WriteLine(i);
+  i++;
+}
+ }
+}
