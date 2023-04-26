@@ -1,0 +1,15 @@
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\obj\Debug\net7.0\WorkingOnModels.csproj.AssemblyReference.cache
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\obj\Debug\net7.0\WorkingOnModels.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\obj\Debug\net7.0\WorkingOnModels.AssemblyInfoInputs.cache
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\obj\Debug\net7.0\WorkingOnModels.AssemblyInfo.cs
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\obj\Debug\net7.0\WorkingOnModels.csproj.CoreCompileInputs.cache
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\bin\Debug\net7.0\WorkingOnModels.exe
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\bin\Debug\net7.0\WorkingOnModels.deps.json
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\bin\Debug\net7.0\WorkingOnModels.runtimeconfig.json
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\bin\Debug\net7.0\WorkingOnModels.dll
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\bin\Debug\net7.0\WorkingOnModels.pdb
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\obj\Debug\net7.0\WorkingOnModels.dll
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\obj\Debug\net7.0\refint\WorkingOnModels.dll
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\obj\Debug\net7.0\WorkingOnModels.pdb
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\obj\Debug\net7.0\WorkingOnModels.genruntimeconfig.cache
+C:\Users\dell\Desktop\C-Sharp-Practice\WorkingOnModels\obj\Debug\net7.0\ref\WorkingOnModels.dll
