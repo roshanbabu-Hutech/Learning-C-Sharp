@@ -7,6 +7,7 @@ using System.Data;
 using Dapper;
 using Microsoft.Data.SqlClient;
 using System.Collections;
+using System.Collections.Generic;
 
 
 namespace Project
@@ -27,6 +28,18 @@ namespace Project
             // after connection established from the database execute a query command on tables
 
             DateTime rightNow = dbConnectionObject.QuerySingle<DateTime>(sqlQuery);
+
+            string sqlQuery1 = "SELECT * from TutorialAppSchema.Computer";
+
+            Console.WriteLine(dbConnectionObject);
+
+            // var records = dbConnectionObject.QuerySingle<ArrayList>(sqlQuery1);
+
+            // var records = dbConnectionObject.QuerySingle<List<object>>(sqlQuery1);
+
+            // var records = dbConnectionObject.execute<Computer>(sqlQuery1);
+
+            // Console.WriteLine(records);
 
             Console.WriteLine(rightNow);
 
