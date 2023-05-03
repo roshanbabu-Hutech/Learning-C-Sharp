@@ -1,11 +1,21 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ApplicationDbContext>(options=>
-options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-var app = builder.Build();
+builder.Services.AddDbContext<ApplicationDbContext>(option => {
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
+});
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddResponseCaching();
+builder.Services.AddScoped<IVillaRepository, VillaRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IVillaNumberRepository, VillaNumberRepository>();
+builder.Services.AddAutoMapper(typeof(MappingConfig));
+builder.Services.AddApiVersioning(options => {
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.ReportApiVersions = true;
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
