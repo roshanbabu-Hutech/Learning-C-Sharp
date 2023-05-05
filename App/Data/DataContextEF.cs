@@ -2,7 +2,7 @@ using DotnetAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DotnetAPI.Data
-{
+{ 
     public class DataContextEF : DbContext
     {
         private readonly IConfiguration _config;
