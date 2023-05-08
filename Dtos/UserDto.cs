@@ -5,7 +5,6 @@ namespace WebApplication13.Dtos
 {
 	public class UserDto
 	{
-		public string Name { get; set; }
 		[Required]
 		public string Email { get; set; }
 		[Required]
@@ -13,10 +12,6 @@ namespace WebApplication13.Dtos
 
 		public UserDto()
 		{
-			if (Name == null)
-			{
-				Name = "";
-			}
 			if (Email == null)
 			{
 				Email = "";

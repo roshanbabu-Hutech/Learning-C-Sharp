@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using WebApplication13.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,12 +21,14 @@ builder.Services.AddCors((options) =>
 	});
 	options.AddPolicy("ProdCors", (CorsPolicyBuilder) =>
 	{
-		CorsPolicyBuilder.WithOrigins("http://localhost:4200", "http://localhost:3000", "http://localhost:8000")
+		CorsPolicyBuilder.WithOrigins("https://www.vibinSoftwareSolutions.com")
 		.AllowCredentials()
 		.AllowAnyHeader()
 		.AllowAnyMethod();
 	});
 });
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 //string? token = builder.Configuration.GetSection("TokenKey").Value;
 
