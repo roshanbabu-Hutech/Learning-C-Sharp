@@ -14,12 +14,10 @@ namespace WebApplication13.Controllers
 	[Route("[controller]")]
 	public class UserController : ControllerBase
 	{
-		ApplicationDbContext _Db;
 		IMapper _mapper;
 		IUserRepository _userRepository;
-		public UserController(IConfiguration config,IUserRepository userRepository)
+		public UserController(IUserRepository userRepository, IMapper mapper)
 		{
-			_Db = new ApplicationDbContext(config);
 			_userRepository = userRepository;
 			_mapper = new Mapper(new MapperConfiguration(cfg=>{
 				cfg.CreateMap<UserDto,User>();
@@ -27,17 +25,19 @@ namespace WebApplication13.Controllers
 		}
 
 		[HttpGet("users")]
-		public IEnumerable<User> GetUsers()
-		{
-			IEnumerable<User> users = _userRepository.GetUsers();
-			//Response.WriteAsync("Succussfully fetched all the user records");
-			return users;
-		}
+		//public IEnumerable<User> GetUsers()
+		//{
+		//	IEnumerable<User> users = _userRepository.GetUsers();
+		//	//IEnumerable<UserDto> usersDto = _mapper.Map<User,UserDto>(users);
+		//		return users;
+			
+		//	//Response.WriteAsync("Succussfully fetched all the user records");
+		//} 
 		[HttpPost("addUser")]
 		public IActionResult AddUser(User user)
 		{
-			_Db.Users.Add(user);
-			if(_Db.SaveChanges() > 0)
+			_userRepository.AddRecord(user);
+			if(_userRepository.SaveChanges())
 			{
 				Console.WriteLine(user.Email);
 				Console.WriteLine(user.Name);
@@ -52,103 +52,47 @@ namespace WebApplication13.Controllers
 		[HttpDelete("deleteUser/{UserId}")]
 		public IActionResult DeleteUser(int UserId)
 		{
-			User? userRecord = _Db.Users.Where(t => t.UserId == UserId).FirstOrDefault();
-			if (userRecord != null) { 
-				_Db.Users.Remove(userRecord);
-				if (_Db.SaveChanges() > 0)
+				User user = _userRepository.GetSingleUser(UserId);
+				if(user != null)
 				{
-					Console.WriteLine(UserId);
-					Console.WriteLine(userRecord);
-					Console.WriteLine("User Record Succussfully deleted");
-					return Ok("User Record Succussfully deleted from the database");
+					_userRepository.DeleteRecord(user);
+					if (_userRepository.SaveChanges())
+					{
+						return Ok("User Deleted Succussfully");
+					}
+					else
+					{
+						throw new Exception("Failed to delete the User");
+					}
 				}
 				else
 				{
-					throw new Exception("There's an error while deleting the record from the database");
+					throw new Exception($"Unable to Get user {UserId}");
 				}
-			}
-			else
-			{
-				throw new Exception("There's an no user record with this ID");
-			}
+			
 			
 		}
 		[HttpPut("updateUser/{UserId}")]
 		public IActionResult UpdateUser(User User)
 		{
-			User? userRecord = _Db.Users.Where(t => t.UserId == User.UserId).FirstOrDefault();
-			if (userRecord != null)
+			_userRepository.UpdateRecord(User);
+			if (_userRepository.SaveChanges())
 			{
-				userRecord.Email = User.Email;
-				userRecord.Name = User.Name;
-				string password = BCrypt.Net.BCrypt.EnhancedHashPassword(User.Password);
-				userRecord.Password = password;
-				if (_Db.SaveChanges() > 0)
-				{
-					Console.WriteLine(userRecord.Email);
-					Console.WriteLine(userRecord.Name);
-					Console.WriteLine(userRecord.Password);
-					return Ok(userRecord);
-				}
-				else
-				{
-					throw new Exception("There's an error while updating the user data");
-				}
+				return Ok("User Record Updated Succussfully");
 			}
 			else
 			{
-				throw new Exception("There's no any record with the id you provided");
+				throw new Exception("There's an error while Updating the User Record");
 			}
-		}
+			
+			}
 		[HttpGet("Getuser/{UserId}")]
 		public User GetUser(int UserId)
 		{
 			Console.WriteLine("The User Id is"+UserId);
 
-			// Define the secret key used to sign the token
-			var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Natasha Malkova"));
-
-			// Define the signing credentials used to sign the token
-			var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-
-			// Define the claims for the token
-			var claims = new[]
-			{
-	new Claim(ClaimTypes.Name, "John Smith"),
-	new Claim(ClaimTypes.Email, "john.smith@example.com")
-};
-
-			// Define the token descriptor
-			var tokenDescriptor = new SecurityTokenDescriptor
-			{
-				Subject = new ClaimsIdentity(claims),
-				Expires = DateTime.UtcNow.AddHours(1),
-				SigningCredentials = signingCredentials
-			};
-
-			// Create the token handler
-			var tokenHandler = new JwtSecurityTokenHandler();
-
-			// Generate the token
-			var token = tokenHandler.CreateToken(tokenDescriptor);
-			Console.WriteLine(token);
-			// Get the token string
-			var tokenString = tokenHandler.WriteToken(token);
-			Console.WriteLine(tokenString);
-
-			User? user = _Db.Users.FirstOrDefault(t => t.UserId == UserId);
-			if (user != null)
-			{
-				string password = BCrypt.Net.BCrypt.EnhancedHashPassword(user.Password);
-				Console.WriteLine($"The User Password is {user.Password}");
-				Console.WriteLine($"The hashed Password is {password}");
-				return user;
-			}
-			else
-			{
-				throw new Exception("There's no User with the given id");
-			}
-
+			return _userRepository.GetSingleUser(UserId);
+			
 		}
 	}
 }

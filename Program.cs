@@ -30,6 +30,8 @@ builder.Services.AddCors((options) =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 //string? token = builder.Configuration.GetSection("TokenKey").Value;
 
 var app = builder.Build();

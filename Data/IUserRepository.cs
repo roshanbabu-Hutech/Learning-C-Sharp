@@ -8,6 +8,9 @@ namespace WebApplication13.Data
 		public void AddRecord<T>(T addRecord);
 		public IEnumerable<User> GetUsers();
 
+		public void DeleteRecord<T>(T UserId);
+		public User GetSingleUser(int UserId);
+		public void UpdateRecord(User user);
 
 	}
 }
