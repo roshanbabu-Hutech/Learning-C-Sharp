@@ -14,6 +14,8 @@ namespace WebApplication13.Services
         public User GetSingleUser(int UserId);
         public void UpdateUserDetails(UserDetails details);
         public UserDetails GetSingleUserDetail(int UserId);
+        public IEnumerable<UserDetailsDto> GetAllUserDetails();
+
 
 
 		//public void AddUserDetails(UserDetails userDetails);

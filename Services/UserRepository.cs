@@ -128,7 +128,7 @@ namespace WebApplication13.Services
 		}
         public UserDetails GetSingleUserDetail(int UserId)
         {
-            UserDetails User = _Db.UsersDetails.Where(t=>t.UserId == UserId).FirstOrDefault();
+            UserDetails? User = _Db.UsersDetails.Where(t=>t.UserId == UserId).FirstOrDefault();
             if (User != null)
             {
                 return User;
@@ -138,5 +138,17 @@ namespace WebApplication13.Services
                 throw new Exception("There's No User Record with the given User Id");
             }
         }
+        public IEnumerable<UserDetailsDto> GetAllUserDetails()
+        {
+            IEnumerable<UserDetails> Users = _Db.UsersDetails.ToList();
+            if(Users != null)
+            {
+				return _mapper.Map<IEnumerable<UserDetails>,IEnumerable<UserDetailsDto>>(Users);    
+            }
+            else
+            {
+                throw new Exception("There are No User Records in the database");
+            }
+		}
     }
 }
