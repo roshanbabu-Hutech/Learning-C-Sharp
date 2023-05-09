@@ -13,10 +13,11 @@ namespace WebApplication13.Services
         public UserRepository(IConfiguration config, IMapper mapper)
         {
             _Db = new ApplicationDbContext(config);
-            _mapper = new Mapper(new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<UserDto, User>();
-            }));
+            _mapper = mapper;
+            //_mapper = new Mapper(new MapperConfiguration(cfg =>
+            //{
+            //    cfg.CreateMap<UserDto, User>();
+            //}));
         }
         public bool SaveChanges()
         {
@@ -125,5 +126,17 @@ namespace WebApplication13.Services
                 throw new Exception();
             }
 		}
+        public UserDetails GetSingleUserDetail(int UserId)
+        {
+            UserDetails User = _Db.UsersDetails.Where(t=>t.UserId == UserId).FirstOrDefault();
+            if (User != null)
+            {
+                return User;
+            }
+            else
+            {
+                throw new Exception("There's No User Record with the given User Id");
+            }
+        }
     }
 }

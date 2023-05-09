@@ -13,6 +13,8 @@ namespace WebApplication13.Services
         public void UpdateRecord(User user);
         public User GetSingleUser(int UserId);
         public void UpdateUserDetails(UserDetails details);
+        public UserDetails GetSingleUserDetail(int UserId);
+
 
 		//public void AddUserDetails(UserDetails userDetails);
 

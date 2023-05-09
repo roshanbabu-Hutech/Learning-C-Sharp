@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using WebApplication13.Data;
 using WebApplication13.Models;
 using WebApplication13.Services;
@@ -11,9 +12,11 @@ namespace WebApplication13.Controllers
 	{
 		//public readonly ApplicationDbContext _Db;
 		public readonly IUserRepository _userRepository;
-		public AddUserDetailsController(IUserRepository userRepository)
+		public readonly IMapper _mapper;
+		public AddUserDetailsController(IUserRepository userRepository, IMapper mapper)
 		{
 			//_Db = db;
+			_mapper = mapper;
 			_userRepository = userRepository;
 		}
 		[HttpPost("addUserDetails")]
