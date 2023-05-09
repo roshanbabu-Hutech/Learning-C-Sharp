@@ -11,6 +11,7 @@ namespace WebApplication13.Data
 			_config = config;
 		}
 		public virtual DbSet<User> Users { get; set; }
+		public virtual DbSet<UserDetails> UsersDetails { get; set; }
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			if (!optionsBuilder.IsConfigured)
@@ -29,6 +30,12 @@ namespace WebApplication13.Data
 			.ToTable("users", "facebook")
 			.HasKey(t => t.UserId);
 			Console.WriteLine("User Table succussfully created");
+
+			modelBuilder.HasDefaultSchema("facebook");
+			modelBuilder.Entity<UserDetails>()
+				.ToTable("User Details", "facebook")
+				.HasKey(t => t.UserId);
+			Console.WriteLine("User Details Table created Succussfully");
 		}
 
 	}

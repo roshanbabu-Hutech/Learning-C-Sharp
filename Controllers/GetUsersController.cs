@@ -1,18 +1,18 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication13.Data;
 using WebApplication13.Models;
 using WebApplication13.Dtos;
+using WebApplication13.Services;
 
 namespace WebApplication13.Controllers
 {
-	[ApiController]
+    [ApiController]
 	[Route("[controller]")]
-	public class GetUsers : ControllerBase
+	public class GetUsersController : ControllerBase
 	{
 		IMapper _mapper;
 		IUserRepository _userRepository;
-		public GetUsers(IUserRepository userRepository, IMapper mapper)
+		public GetUsersController(IUserRepository userRepository, IMapper mapper)
 		{
 			_userRepository = userRepository;
 			_mapper = new Mapper(new MapperConfiguration(cfg => {
